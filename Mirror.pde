@@ -1,6 +1,7 @@
 float [] x = new float [3000];
 Player player;
 int state = 0; //starting state
+float x_axis = 0;
 
 void setup(){
   
@@ -30,7 +31,7 @@ void draw(){
         float y = i * 8;
         fill(255);
         arc(y-=0.01, x[i], 12, 12, 0.52, 5.76);
-        float x_axis = y-=0.01;
+        x_axis = y-=0.01;
         ellipse(x_axis, x[i], 12,12);
       }
     break;
@@ -63,7 +64,7 @@ class Player{
      }else{
        state += 1;
      }
-     if(|mouseX - x_axis| <= 24 && |mouseY - x[i]| <= 24){
+     if(abs(mouseX - x_axis) < 24.0 && abs(mouseY - x[i]) < 24.0){
        state += 1;
      }else{
        println("Keep going!");
