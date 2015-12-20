@@ -53,18 +53,18 @@ void badend(){
 
 
 class Player{
-   int x = mouseX;
-   int y = mouseY;
+   float x = mouseX;
+   float y = mouseY;
    void display(){
      noStroke();
-     if(mouseX < width/2-5){
+     if(x < width/2-5){
        fill(125,233,193);
-       rect(mouseX,mouseY,24,24);
-       rect(width-mouseX,height-mouseY,24,24);
+       rect(x,y,24,24);
+       rect(width-x,height-y,24,24);
      }else{
        state += 1;
      }
-     if(abs(mouseX - x_axis) < 24.0 && abs(mouseY - x[i]) < 24.0){
+     if(abs(x - x_axis) < 24.0 && abs(y - x[i]) < 24.0){
        state += 1;
      }else{
        println("Keep going!");
