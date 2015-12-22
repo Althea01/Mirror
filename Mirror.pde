@@ -1,4 +1,5 @@
 float [] x = new float [3000];
+float [] recordY = new float [3000];
 Player player;
 int state = 0; //starting state
 float x_axis = 0;
@@ -11,6 +12,7 @@ void setup(){
   player = new Player();
   for (int i = 0; i<x.length; i+=1){
     x[i] = random(-1000,200);
+    recordY[i] = 1000;
   }
 }
   
@@ -25,14 +27,16 @@ void draw(){
   {
     case 0:
       player.display();
-  
+      float tempY;
       for (int i = 0; i<x.length;i++){
         x[i] += 0.5;
         float y = i * 8;
         fill(255);
-        arc(y-=0.01, x[i], 12, 12, 0.52, 5.76);
+        tempY = y-=0.01;
+        recordY[i] = tempY;
+        arc(tempY, x[i], 12, 12, 0.52, 5.76);
         x_axis = y-=0.01;
-        ellipse(x_axis, x[i], 12,12);
+//        ellipse(x_axis, x[i], 12,12);
       }
     break;
     case 1:
@@ -53,21 +57,25 @@ void badend(){
 
 
 class Player{
-   float x = mouseX;
-   float y = mouseY;
    void display(){
      noStroke();
-     if(x < width/2-5){
+     if(mouseX < width/2-5){
        fill(125,233,193);
-       rect(x,y,24,24);
-       rect(width-x,height-y,24,24);
+       rect(mouseX,mouseY,24,24);
+       rect(width-mouseX,height-mouseY,24,24);
      }else{
        state += 1;
      }
-     if(abs(x - x_axis) < 24.0 && abs(y - x[i]) < 24.0){
-       state += 1;
-     }else{
-       println("Keep going!");
+
+  for (int i=0;i<x.length;i++)
+     {
+//       if(abs(mouseX - recordY[i]) < 5.0 && abs(mouseY - x[i]) < 5.0){
+      if(abs(mouseX - recordY[i]) < 7.0 && abs(mouseY - x[i]) < 7.0){         state += 1;
+         break;
+       }else{
+//           println(i+"is"+recordY[i]+" "+x[i]);
+//         println("Keep going!");
+       }
      }
    }
 }
