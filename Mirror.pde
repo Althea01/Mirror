@@ -29,8 +29,8 @@ void draw(){
       player.display();
       float tempY;
       for (int i = 0; i<x.length;i++){
-        x[i] += 0.5;
-        float y = i * 8;
+        x[i] += 2.5;
+        float y = i * 12;
         fill(255);
         tempY = y-=0.01;
         recordY[i] = tempY;
